@@ -1,8 +1,5 @@
 console.log("NEW LUXURY STORY SCRIPT LOADED");
 
-// ========================================
-// GLOBAL STATE STORAGE
-// ========================================
 const formData = {
     availableTime: "",
     moodValue: 5,
@@ -11,34 +8,31 @@ const formData = {
     hungerValue: 5,
     stressValue: 0,
     romanceValue: 5,
+    musicValue: 5, // NEUER MUSIC WERT
     dinnerPreference: "",
     selectedRelationship: "",
     userNote: "",
     confirmed: false
 };
 
-// ========================================
-// FORMSPREE CONFIGURATION
-// ========================================
 const FORMSPREE_ENDPOINT = "https://formspree.io/f/xnpaqqzv";
 
-// ========================================
-// SECTION NAVIGATION (`nextSection`)
-// ========================================
 function nextSection(nextId) {
     const current = document.querySelector('.section.active');
-    if (current) {
-        current.classList.remove('active');
-    }
+    if (current) current.classList.remove('active');
+    
     const next = document.getElementById(nextId);
-    if (next) {
-        next.classList.add('active');
-    }
+    if (next) next.classList.add('active');
 }
 
-// ========================================
-// TIME INPUT
-// ========================================
+// Zeit setzen über Buttons
+function setTimeAndContinue(time) {
+    document.getElementById('available-time').value = time;
+    formData.availableTime = time;
+    nextSection('mood-section');
+}
+
+// Zeit setzen über Freitextfeld
 function handleTimeSubmit(e) {
     e.preventDefault();
     const val = document.getElementById('available-time').value;
@@ -48,14 +42,10 @@ function handleTimeSubmit(e) {
     }
 }
 
-// ========================================
-// SLIDER MESSAGES
-// ========================================
 function updateMoodMessage() {
     const val = parseInt(document.getElementById('mood-slider').value);
     formData.moodValue = val;
     const msg = document.getElementById('mood-message');
-
     if (val <= 3) msg.textContent = "Let's see if I can improve your mood.";
     else if (val <= 6) msg.textContent = "At least you're not a zombie.";
     else if (val <= 8) msg.textContent = "Promising.";
@@ -67,7 +57,6 @@ function updateLikeMessage() {
     const val = parseInt(document.getElementById('like-slider').value);
     formData.likeValue = val;
     const msg = document.getElementById('like-message');
-
     if (val <= 3) msg.textContent = "Ouch. Let's see if I can improve that.";
     else if (val <= 6) msg.textContent = "I'll take my chances.";
     else if (val <= 8) msg.textContent = "Promising.";
@@ -79,7 +68,6 @@ function updateSocialMessage() {
     const val = parseInt(document.getElementById('social-slider').value);
     formData.socialValue = val;
     const msg = document.getElementById('social-message');
-
     if (val <= 2) msg.textContent = "Just the two of us.";
     else if (val <= 4) msg.textContent = "Somewhere quiet.";
     else if (val <= 6) msg.textContent = "A relaxed atmosphere.";
@@ -91,7 +79,6 @@ function updateHungerMessage() {
     const val = parseInt(document.getElementById('hunger-slider').value);
     formData.hungerValue = val;
     const msg = document.getElementById('hunger-message');
-
     if (val <= 2) msg.textContent = "Wine is enough.";
     else if (val <= 4) msg.textContent = "Maybe something small.";
     else if (val <= 6) msg.textContent = "A proper meal sounds good.";
@@ -103,7 +90,6 @@ function updateStressMessage() {
     const val = parseInt(document.getElementById('stress-slider').value);
     formData.stressValue = val;
     const msg = document.getElementById('stress-message');
-
     if (val <= 2) msg.textContent = "Peaceful.";
     else if (val <= 4) msg.textContent = "A little busy.";
     else if (val <= 6) msg.textContent = "Feeling the pressure.";
@@ -115,7 +101,6 @@ function updateRomanceMessage() {
     const val = parseInt(document.getElementById('romance-slider').value);
     formData.romanceValue = val;
     const msg = document.getElementById('romance-message');
-
     if (val <= 2) msg.textContent = "Just cuddles.";
     else if (val <= 4) msg.textContent = "Maybe one round.";
     else if (val <= 6) msg.textContent = "Extremely ready.";
@@ -123,9 +108,16 @@ function updateRomanceMessage() {
     else msg.textContent = "Let's make babies.";
 }
 
-// ========================================
-// REVEAL SEQUENCE
-// ========================================
+// NEUE MUSIK FUNKTION
+function updateMusicMessage() {
+    const val = parseInt(document.getElementById('music-slider').value);
+    formData.musicValue = val;
+    const msg = document.getElementById('music-message');
+    if (val <= 3) msg.textContent = "Random playlist chosen by Tori";
+    else if (val <= 7) msg.textContent = "Random playlist chosen by Phillip";
+    else msg.textContent = "DJ Tori";
+}
+
 const revealTexts = [
     "I could simply ask.",
     "But I enjoy building things for you.",
@@ -164,14 +156,11 @@ function runTypewriterSequence() {
         }, 45);
     } else {
         setTimeout(() => {
-            nextSection('story-1');
+            nextSection('dinner-section');
         }, 1400);
     }
 }
 
-// ========================================
-// INPUT HANDLERS
-// ========================================
 function handleDinnerSubmit(e) {
     e.preventDefault();
     const val = document.getElementById('dinner-input').value;
@@ -183,21 +172,12 @@ function handleDinnerSubmit(e) {
 
 function handleNoteSubmit(e) {
     e.preventDefault();
-    const val = document.getElementById('user-note').value;
-    formData.userNote = val;
+    formData.userNote = document.getElementById('user-note').value;
     nextSection('choices-section');
 }
 
 function confirmChoice(choiceText){
     formData.selectedRelationship = choiceText;
-    nextSection('final-section');
-}
-
-// ========================================
-// FINAL CONFIRMATION & FORMSPREE SUBMISSION
-// ========================================
-function finalAccept(){
-    formData.confirmed = true;
     sendDataSilently();
     nextSection('success-section');
     initCelebration();
@@ -206,9 +186,7 @@ function finalAccept(){
 function sendDataSilently(){
     fetch(FORMSPREE_ENDPOINT, {
         method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
             subject: "❤️ Friday Experience Completed!",
             availableTime: formData.availableTime,
@@ -218,15 +196,13 @@ function sendDataSilently(){
             hungerLevel: `${formData.hungerValue}/10`,
             stressLevel: `${formData.stressValue}/10`,
             romanceLevel: `${formData.romanceValue}/10`,
+            musicPreference: `${formData.musicValue}/10`, // NEUER MUSIK WERT SENDEN
             dinnerPreference: formData.dinnerPreference || "(None)",
             weekendThoughts: formData.userNote || "(None)",
             relationshipStatus: formData.selectedRelationship,
             status: "Accepted ❤️"
         })
-    })
-    .catch(error => {
-        console.log("Background sync error", error);
-    });
+    }).catch(error => console.log("Background sync error", error));
 }
 
 function initCelebration() {
@@ -265,7 +241,6 @@ function initCelebration() {
         requestAnimationFrame(draw);
     }
     draw();
-
     window.addEventListener('resize', () => {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
