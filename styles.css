@@ -106,58 +106,39 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    pointer-events: none;
+    pointer-events: none; /* Man kann weiterhin durchklicken/klicken */
     overflow: hidden;
-    z-index: 1;
+    z-index: 1; /* Hinter dem Text (Text hat z-index 2) */
+}
+
+#hero .hero-content {
+    position: relative;
+    z-index: 2;
 }
 
 /* Einzelne fliegende Katze */
 .flying-cat {
     position: absolute;
-    font-size: 2rem;
-    animation: flyUpAndDrift linear infinite;
-    opacity: 0.7;
+    bottom: -50px; /* Starten unterhalb des sichtbaren Bereichs */
+    animation: flyUpAndDrift linear forwards;
+    opacity: 0;
+    user-select: none;
 }
 
-/* Zufällige Positionen und Geschwindigkeiten im Hero */
-.flying-cat:nth-child(1) {
-    left: 15%;
-    animation-duration: 6s;
-    animation-delay: 0s;
-}
-
-.flying-cat:nth-child(2) {
-    left: 40%;
-    animation-duration: 8s;
-    animation-delay: 2s;
-}
-
-.flying-cat:nth-child(3) {
-    left: 70%;
-    animation-duration: 7s;
-    animation-delay: 1s;
-}
-
-.flying-cat:nth-child(4) {
-    left: 85%;
-    animation-duration: 9s;
-    animation-delay: 3s;
-}
-
-/* Die Flug-Animation nach oben */
+/* Die Flug-Animation nach oben mit leichtem seitlichen Schwenk */
 @keyframes flyUpAndDrift {
     0% {
-        transform: translateY(100vh) translateX(0) rotate(0deg);
+        transform: translateY(0) translateX(0) rotate(0deg);
         opacity: 0;
     }
-    15% {
-        opacity: 0.7;
+    10% {
+        opacity: 0.8;
     }
-    85% {
-        opacity: 0.7;
+    90% {
+        opacity: 0.8;
     }
     100% {
-        transform: translateY(-20vh) translateX(30px) rotate(360deg);
+        transform: translateY(-105vh) translateX(40px) rotate(360deg);
         opacity: 0;
     }
 }
