@@ -12,12 +12,49 @@
 <body>
 
     <section id="hero" class="section active">
-        <div class="flying-cats-container">
-            <div class="flying-cat">🐱</div>
-            <div class="flying-cat">😻</div>
-            <div class="flying-cat">😸</div>
-            <div class="flying-cat">🐱</div>
-        </div>
+        <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const hero = document.getElementById('hero');
+            if (!hero) return;
+
+            // Container für Katzen erstellen
+            const container = document.createElement('div');
+            container.className = 'flying-cats-container';
+            hero.appendChild(container);
+
+            // Symbole oder Emojis für die Katzen
+            const catSymbols = ['🐱', '😻', '😸', '🐈', '🐾'];
+
+            // Alle paarhundert Millisekunden eine neue Katze erzeugen
+            setInterval(() => {
+                // Prüfen ob wir uns noch im Hero befinden (optional, aber gut)
+                if (!hero.classList.contains('active')) return;
+
+                const cat = document.createElement('div');
+                cat.className = 'flying-cat';
+                cat.textContent = catSymbols[Math.floor(Math.random() * catSymbols.length)];
+                
+                // Zufällige Startposition auf der X-Achse (0% bis 100%)
+                cat.style.left = Math.random() * 90 + '%';
+                
+                // Zufällige Größe (zwischen 1.2rem und 2.5rem)
+                cat.style.fontSize = (Math.random() * 1.3 + 1.2) + 'rem';
+                
+                // Zufällige Animationsdauer (zwischen 4 und 8 Sekunden)
+                const duration = Math.random() * 4 + 4;
+                cat.style.animationDuration = duration + 's';
+
+                container.appendChild(cat);
+
+                // Katze nach Ende der Animation wieder löschen, um Speicher zu sparen
+                setTimeout(() => {
+                    cat.remove();
+                }, duration * 1000);
+
+            }, 800); // Alle 0,8 Sekunden startet eine neue Katze
+        });
+    </script>
+</body>
 
         <div class="hero-content">
             <h1 class="serif-title">Weekend</h1>
