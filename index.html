@@ -4,203 +4,251 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Friday.</title>
+    <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..700;1,400..700&family=Plus+Jakarta+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <div class="section active" id="hero">
-        <div class="container hero-content">
-            <h1>Friday.</h1>
-            <p class="hero-text">Not a plan.<br>Not a schedule.<br>Just us.</p>
-            <button class="btn-primary" onclick="nextSlide()">Continue</button>
-            <div class="scroll-indicator">oder wischen</div>
+    <!-- SECTION 1: HERO -->
+    <section id="hero" class="section active">
+        <div class="hero-content">
+            <h1 class="serif-title">Friday.</h1>
+            <p class="hero-text">
+                Not a plan.<br>
+                Not a schedule.<br>
+                Just us.
+            </p>
+            <p class="hero-decision">One decision.</p>
+            <button class="btn-primary" onclick="nextSection('time-section')">Continue</button>
         </div>
-    </div>
+        <div class="scroll-indicator"><span>Scroll</span></div>
+    </section>
 
-    <div class="section">
+    <!-- SECTION 2: AVAILABLE TIME -->
+    <section id="time-section" class="section">
         <div class="container">
-            <p class="hero-text serif-title">"As I matched with you, I had no idea where this would go.<br>Before we even had our first date, we already argued.<br>And somehow that was exactly the moment I became interested."</p>
-        <img src="weekend-cooking/PHOTO-2026-08-13-12-34-57.jpg" alt="" class="story-image">
+            <h2 class="serif-title">Before we start...</h2>
+            <p class="subtitle">You said you have more time on Friday. Don't give me only the evening.</p>
+            <form id="time-form" onsubmit="handleTimeSubmit(event)">
+                <input type="text" id="available-time" placeholder="What time are you free? (e.g., 18:00)" required autocomplete="off">
+                <button type="submit" class="btn-primary">Next</button>
+            </form>
         </div>
-    </div>
+    </section>
 
-    <div class="section">
-        <div class="container">
-            <p class="hero-text serif-title">"We met again the same week.<br>I was already building things like this for you.<br>That should have been my first warning sign."</p>
-            <img src="weekend-cooking/EveningWasted.jpg" alt="" class="story-image">
-        </div>
-    </div>
-
-    <div class="section">
-        <div class="container">
-            <p class="hero-text serif-title">"Then you went on vacation.<br>And somehow I missed you more than I expected."</p>
-        </div>
-    </div>
-
-    <div class="section">
-        <div class="container">
-            <p class="hero-text serif-title">"After that came our weekend.<br>I cooked for you.<br>Then we went to the wedding."</p>
-            <img src="weekend-cooking/wedding.jpg" alt="" class="story-image">
-        </div>
-    </div>
-
-    <div class="section">
-        <div class="container">
-            <p class="hero-text serif-title">"We were definitely the best couple there."</p>
-        </div>
-    </div>
-
-    <div class="section">
-        <div class="container">
-            <p class="hero-text serif-title">"And then there was that Sunday night.<br>We kissed. Made out. Talked. Argued. Talked again.<br>Somehow fixed things.<br>And ended up eating Turkish food at a bus stop until 4:30 in the morning."</p>
-        </div>
-    </div>
-
-    <div class="section">
-        <div class="container">
-            <p class="hero-text serif-title">"It never gets boring with us.<br>I've never been so reckless with time as I am with you."</p>
-        </div>
-    </div>
-
-    <div class="section">
-        <div class="container">
-            <p class="hero-text serif-title">"We talked about children."</p>
-            <img src="weekend-cooking/Weedingkids.jpg" alt="" class="story-image">
-        </div>
-    </div>
-
-    <div class="section">
-        <div class="container">
-            <p class="hero-text serif-title">"We talked about marriage."</p>
-            <img src="weekend-cooking/Engagementring.jpg" alt="" class="story-image">
-        </div>
-    </div>
-
-    <div class="section">
-        <div class="container">
-            <p class="hero-text serif-title">"And maybe the craziest thing is...<br>None of that feels crazy."</p>
-        </div>
-    </div>
-
-    <div class="section">
-        <div class="container">
-            <p class="hero-text serif-title">"I've never been this sure about someone.<br>Not because it fixes anything.<br>Not because it's perfect.<br>Just because it feels right."</p>
-            <img src="weekend-cooking/Olderkids.jpg" alt="" class="story-image">
-        </div>
-    </div>
-
-    <div class="section">
-        <div class="container">
-            <p class="hero-text serif-title">"So this weekend will be special.<br>Because Saturday belongs to you.<br>You're cooking.<br>But before that...<br>We need to talk about Friday."</p>
-            <button class="btn-primary" onclick="nextSlide()" style="margin-top: 2rem;">Let's talk about Friday</button>
-        </div>
-    </div>
-
-    <div class="section">
-        <div class="container">
-            <h2 class="serif-title" style="font-size: 2.5rem; color: var(--accent-color); margin-bottom: 1rem;">Before we start...</h2>
-            <p class="hero-text">You said you have more time on Friday.<br>Don't give me only the evening.</p>
-            
-            <input type="text" id="custom-time" placeholder="Wann bist du hier? (z.B. 18:00)">
-            <button class="btn-primary" onclick="nextSlide()">Weiter</button>
-        </div>
-    </div>
-
-    <div class="section">
+    <!-- SECTION 3: MOOD SLIDER -->
+    <section id="mood-section" class="section">
         <div class="container">
             <div class="slider-box">
-                <label>How are you feeling for the weekend?</label>
+                <label for="mood-slider" class="serif-title">How are you feeling for the weekend?</label>
                 <div class="slider-scale-labels"><span>😣</span><span>🤩</span></div>
-                <input type="range" min="1" max="5" value="3" id="mood-slider">
-                <p class="dynamic-message" id="mood-msg">Promising.</p>
+                <input type="range" id="mood-slider" min="1" max="10" value="5" oninput="updateMoodMessage()">
+                <p id="mood-message" class="dynamic-message">At least you're not a zombie.</p>
             </div>
-            <button class="btn-secondary" onclick="nextSlide()">Next</button>
+            <button class="btn-primary" onclick="nextSection('like-section')">Next</button>
         </div>
-    </div>
+    </section>
 
-    <div class="section">
+    <!-- SECTION 4: LIKE SLIDER -->
+    <section id="like-section" class="section">
         <div class="container">
             <div class="slider-box">
-                <label>How much do you like me?</label>
+                <label for="like-slider" class="serif-title">How much do you like me?</label>
                 <div class="slider-scale-labels"><span>💔</span><span>❤️</span></div>
-                <input type="range" min="1" max="5" value="3" id="like-slider">
-                <p class="dynamic-message" id="like-msg">Promising.</p>
+                <input type="range" id="like-slider" min="1" max="10" value="5" oninput="updateLikeMessage()">
+                <p id="like-message" class="dynamic-message">I'll take my chances.</p>
             </div>
-            <button class="btn-secondary" onclick="nextSlide()">Next</button>
+            <button class="btn-primary" onclick="nextSection('social-section')">Next</button>
         </div>
-    </div>
+    </section>
 
-    <div class="section">
+    <!-- SECTION 5: SOCIAL BATTERY SLIDER -->
+    <section id="social-section" class="section">
         <div class="container">
             <div class="slider-box">
-                <label>Social battery?</label>
+                <label for="social-slider" class="serif-title">Social battery?</label>
                 <div class="slider-scale-labels"><span>🪫</span><span>🔋</span></div>
-                <input type="range" min="1" max="5" value="3" id="social-slider">
-                <p class="dynamic-message" id="social-msg">A relaxed atmosphere.</p>
+                <input type="range" id="social-slider" min="0" max="10" value="5" oninput="updateSocialMessage()">
+                <p id="social-message" class="dynamic-message">A relaxed atmosphere.</p>
             </div>
-            <button class="btn-secondary" onclick="nextSlide()">Next</button>
+            <button class="btn-primary" onclick="nextSection('hunger-section')">Next</button>
         </div>
-    </div>
+    </section>
 
-    <div class="section">
+    <!-- SECTION 6: HUNGER SLIDER -->
+    <section id="hunger-section" class="section">
         <div class="container">
             <div class="slider-box">
-                <label>Hunger level for Friday?</label>
+                <label for="hunger-slider" class="serif-title">Hunger level for Friday?</label>
                 <div class="slider-scale-labels"><span>🍷</span><span>🥩</span></div>
-                <input type="range" min="1" max="5" value="3" id="hunger-slider">
-                <p class="dynamic-message" id="hunger-msg">A proper meal sounds good.</p>
+                <input type="range" id="hunger-slider" min="0" max="10" value="5" oninput="updateHungerMessage()">
+                <p id="hunger-message" class="dynamic-message">A proper meal sounds good.</p>
             </div>
-            <button class="btn-secondary" onclick="nextSlide()">Next</button>
+            <button class="btn-primary" onclick="nextSection('stress-section')">Next</button>
         </div>
-    </div>
+    </section>
 
-    <div class="section" id="reveal">
+    <!-- SECTION 7: STRESS LEVEL SLIDER -->
+    <section id="stress-section" class="section">
+        <div class="container">
+            <div class="slider-box">
+                <label for="stress-slider" class="serif-title">Stress level?</label>
+                <div class="slider-scale-labels"><span>😎</span><span>😰</span></div>
+                <input type="range" id="stress-slider" min="0" max="10" value="0" oninput="updateStressMessage()">
+                <p id="stress-message" class="dynamic-message">Peaceful</p>
+            </div>
+            <button class="btn-primary" onclick="nextSection('romance-section')">Next</button>
+        </div>
+    </section>
+
+    <!-- SECTION 8: ROMANCE LEVEL SLIDER -->
+    <section id="romance-section" class="section">
+        <div class="container">
+            <div class="slider-box">
+                <label for="romance-slider" class="serif-title">Romance level?</label>
+                <div class="slider-scale-labels"><span>😴</span><span>🥵</span></div>
+                <input type="range" id="romance-slider" min="0" max="10" value="5" oninput="updateRomanceMessage()">
+                <p id="romance-message" class="dynamic-message">Something special</p>
+            </div>
+            <button class="btn-primary" onclick="nextSection('editorial-section')">Next</button>
+        </div>
+    </section>
+
+    <!-- SECTION 9: OUR FRIDAY (EDITORIAL SECTION) -->
+    <section id="editorial-section" class="section editorial-section">
+        <div class="container editorial-container center-text">
+            <span class="editorial-eyebrow">The Experience</span>
+            <h2 class="serif-title editorial-title">Our Friday</h2>
+            <div class="editorial-content">
+                <p>Arriving together without the rush, letting the outside world fade away entirely.</p>
+                <p>Deciding the evening's cadence based precisely on your hunger level—whether that means opening a bottle of exceptional wine right away or moving straight to the kitchen.</p>
+                <p>Cooking together if the mood takes us, or keeping it entirely effortless. A movie if it fits the atmosphere, or simply losing track of hours in conversation.</p>
+                <p class="editorial-highlight">No rigid plans. Just spontaneous decisions, complete relaxation, and following the vibe wherever it leads us.</p>
+            </div>
+            <button class="btn-primary" onclick="startReveal()">Continue Story</button>
+        </div>
+    </section>
+
+    <!-- SECTION 10: THE REVEAL -->
+    <section id="reveal-section" class="section">
         <div class="container reveal-container">
-            <p id="typewriter-text" class="typewriter serif-title"></p>
-            <button class="btn-primary" id="reveal-btn" onclick="nextSlide()" style="opacity: 0; pointer-events: none; transition: 1s;">What's next?</button>
+            <div id="typewriter-text" class="serif-title typewriter" style="white-space: pre-line;"></div>
         </div>
-    </div>
+    </section>
 
-    <div class="section">
-        <div class="container">
-            <h2 class="serif-title" style="font-size: 2rem; color: var(--accent-color); margin-bottom: 2rem;">Tell me what you would love to eat on Friday night.</h2>
-            <input type="text" id="dinner-input" placeholder="Your cravings here...">
-            <button class="btn-primary" onclick="nextSlide()">Fast geschafft</button>
+    <!-- SECTION 11: STORY TIMELINE CHAPTERS -->
+    <section id="story-1" class="section">
+        <div class="container center-text">
+            <p class="story-chapter-text serif-title">"As I matched with you, I had no idea where this would go. Before we even had our first date, we already argued. And somehow that was exactly the moment I became interested."</p>
+            <button class="btn-primary" onclick="nextSection('story-2')">Next</button>
         </div>
-    </div>
+    </section>
 
-    <div class="section">
+    <section id="story-2" class="section">
+        <div class="container center-text">
+            <p class="story-chapter-text serif-title">"We met again the same week. I was already building things like this for you. That should have been my first warning sign."</p>
+            <button class="btn-primary" onclick="nextSection('story-3')">Next</button>
+        </div>
+    </section>
+
+    <section id="story-3" class="section">
+        <div class="container center-text">
+            <p class="story-chapter-text serif-title">"Then you went on vacation. And somehow I missed you more than I expected."</p>
+            <button class="btn-primary" onclick="nextSection('story-4')">Next</button>
+        </div>
+    </section>
+
+    <section id="story-4" class="section">
+        <div class="container center-text">
+            <p class="story-chapter-text serif-title">"After that came our weekend. I cooked for you. Then we went to the wedding. We were definitely the best couple there."</p>
+            <button class="btn-primary" onclick="nextSection('story-5')">Next</button>
+        </div>
+    </section>
+
+    <section id="story-5" class="section">
+        <div class="container center-text">
+            <p class="story-chapter-text serif-title">"And then there was that Sunday night. We kissed. Made out. Talked. Argued. Talked again. Somehow fixed things. And ended up eating Turkish food at a bus stop until 4:30 in the morning."</p>
+            <button class="btn-primary" onclick="nextSection('story-6')">Next</button>
+        </div>
+    </section>
+
+    <section id="story-6" class="section">
+        <div class="container center-text">
+            <p class="story-chapter-text serif-title">"It never gets boring with us. I've never been so reckless with time as I am with you."</p>
+            <button class="btn-primary" onclick="nextSection('story-7')">Next</button>
+        </div>
+    </section>
+
+    <section id="story-7" class="section">
+        <div class="container center-text">
+            <p class="story-chapter-text serif-title">"We talked about children and marriage. And maybe the craziest thing is... None of that feels crazy."</p>
+            <button class="btn-primary" onclick="nextSection('story-8')">Next</button>
+        </div>
+    </section>
+
+    <section id="story-8" class="section">
+        <div class="container center-text">
+            <p class="story-chapter-text serif-title">"I've never been this sure about someone. Not because it fixes anything. Not because it's perfect. Just because it feels right."</p>
+            <button class="btn-primary" onclick="nextSection('dinner-section')">Next</button>
+        </div>
+    </section>
+
+    <!-- SECTION 12: DINNER INPUT -->
+    <section id="dinner-section" class="section">
         <div class="container">
-            <h2 class="serif-title" style="font-size: 2rem; color: var(--accent-color); margin-bottom: 2rem;">One last thing...</h2>
+            <h2 class="serif-title title-large">Tell me what you would love to eat on Friday night.</h2>
+            <form id="dinner-form" onsubmit="handleDinnerSubmit(event)">
+                <input type="text" id="dinner-input" placeholder="Your cravings here..." required autocomplete="off">
+                <button type="submit" class="btn-primary">Next</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- SECTION 13: WEEKEND THOUGHTS INPUT -->
+    <section id="note-section" class="section">
+        <div class="container">
+            <h2 class="serif-title title-large">One last thing...</h2>
             <p class="subtitle">Tell me anything you have in mind for the weekend.</p>
-            <input type="text" id="weekend-input" placeholder="Your thoughts...">
-            <button class="btn-primary" onclick="nextSlide()">Zur letzten Frage</button>
+            <form id="note-form" onsubmit="handleNoteSubmit(event)">
+                <input type="text" id="user-note" placeholder="Your thoughts..." autocomplete="off">
+                <button type="submit" class="btn-primary">The final question</button>
+            </form>
         </div>
-    </div>
+    </section>
 
-    <div class="section">
-        <div class="container">
-            <h1 class="success-title serif-title">So...</h1>
-            <p class="subtitle serif-title" style="font-size: 1.5rem;">What are we?</p>
+    <!-- SECTION 14: RELATIONSHIP STATUS CHOICE -->
+    <section id="choices-section" class="section">
+        <div class="container center-text">
+            <h2 class="serif-title title-large">So...</h2>
+            <p class="subtitle serif-title">What are we?</p>
             
             <div class="choice-grid">
-                <div class="choice-card glow-card" onclick="submitFinal('We are a couple.')">We're a couple.</div>
-                <div class="choice-card" onclick="submitFinal('I need more time.')">I need more time.</div>
-                <div class="choice-card" onclick="submitFinal('Let us keep dating.')">Let's keep dating.</div>
+                <div class="choice-card glow-card" onclick="confirmChoice('We are a couple.')"><span>We're a couple.</span></div>
+                <div class="choice-card" onclick="confirmChoice('I need more time.')"><span>I need more time.</span></div>
+                <div class="choice-card" onclick="confirmChoice('Let us keep dating.')"><span>Let's keep dating.</span></div>
+                <div class="choice-card" onclick="confirmChoice('I am all in.')"><span>I'm all in.</span></div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <div class="section" id="final-screen">
-        <div class="container">
-            <h2 class="success-title serif-title" style="font-size: 2.5rem; margin-bottom: 1rem;">I know this is crazy.</h2>
+    <!-- SECTION 15: FINAL CONFIRMATION -->
+    <section id="final-section" class="section">
+        <div class="container center-text">
+            <h2 class="serif-title title-large">I know this is crazy.</h2>
             <p class="hero-text serif-title">But somehow it feels right.<br>Let me take care of Friday.<br>And let's see where this story takes us.</p>
-            <h1 class="success-title" style="color: var(--gold-color); margin-top: 3rem; font-size: 2rem;">До п'ятниці ❤️</h1>
+            <button class="btn-primary large-btn" onclick="finalAccept()">Yes, I'd love to.</button>
         </div>
-    </div>
+    </section>
+
+    <!-- FINAL SCREEN -->
+    <section id="success-section" class="section">
+        <canvas id="confetti"></canvas>
+        <div class="container center-text final-content">
+            <h1 class="serif-title success-title" style="color: var(--gold-color);">До п'ятниці ❤️</h1>
+        </div>
+    </section>
 
     <script src="script.js"></script>
 </body>
