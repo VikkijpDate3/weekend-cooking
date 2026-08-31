@@ -1,223 +1,250 @@
-// ====== APP STATE ======
-const appState = {
-    time: '',
-    mood: 3,
-    like: 3,
-    socialBattery: 3,
-    hunger: 3,
-    stress: 3,
-    romance: 3,
-    dinner: '',
-    weekendThoughts: '',
-    relationshipStatus: ''
+console.log("NEW LUXURY STORY SCRIPT LOADED");
+
+// ========================================
+// GLOBAL STATE STORAGE
+// ========================================
+const formData = {
+    availableTime: "",
+    moodValue: 5,
+    likeValue: 5,
+    socialValue: 5,
+    hungerValue: 5,
+    stressValue: 0,
+    romanceValue: 5,
+    dinnerPreference: "",
+    selectedRelationship: "",
+    userNote: "",
+    confirmed: false
 };
 
-// Replace this with your actual Formspree endpoint string
-const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xqpkeonp'; 
+// ========================================
+// FORMSPREE CONFIGURATION
+// ========================================
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/xnpaqqzv";
 
-// ====== NAVIGATION ======
-function scrollToSection(id) {
-    document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+// ========================================
+// SECTION NAVIGATION (`nextSection`)
+// ========================================
+function nextSection(nextId) {
+    const current = document.querySelector('.section.active');
+    if (current) {
+        current.classList.remove('active');
+    }
+    const next = document.getElementById(nextId);
+    if (next) {
+        next.classList.add('active');
+    }
 }
 
-// ====== SCROLL ANIMATIONS (Intersection Observer) ======
-const observerOptions = {
-    root: null,
-    rootMargin: '0px',
-    threshold: 0.15
-};
+// ========================================
+// TIME INPUT
+// ========================================
+function handleTimeSubmit(e) {
+    e.preventDefault();
+    const val = document.getElementById('available-time').value;
+    if (val.trim() !== "") {
+        formData.availableTime = val;
+        nextSection('mood-section');
+    }
+}
 
-const observer = new IntersectionObserver((entries, observer) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
-            
-            // Trigger typewriter when section 5 is reached
-            if (entry.target.id === 'reveal' && !typewriterStarted) {
-                startTypewriter();
-                typewriterStarted = true;
+// ========================================
+// SLIDER MESSAGES
+// ========================================
+function updateMoodMessage() {
+    const val = parseInt(document.getElementById('mood-slider').value);
+    formData.moodValue = val;
+    const msg = document.getElementById('mood-message');
+
+    if (val <= 3) msg.textContent = "Let's see if I can improve your mood.";
+    else if (val <= 6) msg.textContent = "At least you're not a zombie.";
+    else if (val <= 8) msg.textContent = "Promising.";
+    else if (val === 9) msg.textContent = "Good little dragon.";
+    else msg.textContent = "Perfect for the weekend.";
+}
+
+function updateLikeMessage() {
+    const val = parseInt(document.getElementById('like-slider').value);
+    formData.likeValue = val;
+    const msg = document.getElementById('like-message');
+
+    if (val <= 3) msg.textContent = "Ouch. Let's see if I can improve that.";
+    else if (val <= 6) msg.textContent = "I'll take my chances.";
+    else if (val <= 8) msg.textContent = "Promising.";
+    else if (val === 9) msg.textContent = "I was hoping for more.";
+    else msg.textContent = "Я тебе кохаю.";
+}
+
+function updateSocialMessage() {
+    const val = parseInt(document.getElementById('social-slider').value);
+    formData.socialValue = val;
+    const msg = document.getElementById('social-message');
+
+    if (val <= 2) msg.textContent = "Just the two of us.";
+    else if (val <= 4) msg.textContent = "Somewhere quiet.";
+    else if (val <= 6) msg.textContent = "A relaxed atmosphere.";
+    else if (val <= 8) msg.textContent = "A lively place sounds nice.";
+    else msg.textContent = "Let's dive into the crowd.";
+}
+
+function updateHungerMessage() {
+    const val = parseInt(document.getElementById('hunger-slider').value);
+    formData.hungerValue = val;
+    const msg = document.getElementById('hunger-message');
+
+    if (val <= 2) msg.textContent = "Wine is enough.";
+    else if (val <= 4) msg.textContent = "Maybe something small.";
+    else if (val <= 6) msg.textContent = "A proper meal sounds good.";
+    else if (val <= 8) msg.textContent = "I'll definitely be hungry.";
+    else msg.textContent = "Emergency. Feed me.";
+}
+
+function updateStressMessage() {
+    const val = parseInt(document.getElementById('stress-slider').value);
+    formData.stressValue = val;
+    const msg = document.getElementById('stress-message');
+
+    if (val <= 2) msg.textContent = "Peaceful.";
+    else if (val <= 4) msg.textContent = "A little busy.";
+    else if (val <= 6) msg.textContent = "Feeling the pressure.";
+    else if (val <= 8) msg.textContent = "Running on caffeine.";
+    else msg.textContent = "Don't push your luck.";
+}
+
+function updateRomanceMessage() {
+    const val = parseInt(document.getElementById('romance-slider').value);
+    formData.romanceValue = val;
+    const msg = document.getElementById('romance-message');
+
+    if (val <= 2) msg.textContent = "Just cuddles.";
+    else if (val <= 4) msg.textContent = "Maybe one round.";
+    else if (val <= 6) msg.textContent = "Extremely ready.";
+    else if (val <= 8) msg.textContent = "Take me now.";
+    else msg.textContent = "Let's make babies.";
+}
+
+// ========================================
+// REVEAL SEQUENCE
+// ========================================
+const revealTexts = [
+    "I could simply ask.",
+    "But I enjoy building things for you.",
+    "And honestly...",
+    "This is much more fun."
+];
+
+let textIndex = 0;
+
+function startReveal() {
+    textIndex = 0;
+    nextSection('reveal-section');
+    runTypewriterSequence();
+}
+
+function runTypewriterSequence() {
+    const container = document.getElementById('typewriter-text');
+    if (!container) return;
+
+    if (textIndex < revealTexts.length) {
+        container.textContent = "";
+        let charIndex = 0;
+        const currentString = revealTexts[textIndex];
+
+        const typing = setInterval(() => {
+            if (charIndex < currentString.length) {
+                container.textContent += currentString.charAt(charIndex);
+                charIndex++;
+            } else {
+                clearInterval(typing);
+                setTimeout(() => {
+                    textIndex++;
+                    runTypewriterSequence();
+                }, 1400);
             }
-        }
-    });
-}, observerOptions);
-
-document.querySelectorAll('.fade-scroll').forEach(el => {
-    observer.observe(el);
-});
-// Observe the reveal section explicitly for the typewriter
-observer.observe(document.getElementById('reveal'));
-
-// ====== SECTION 3: TIME SELECTION ======
-const timeBtns = document.querySelectorAll('.time-btn');
-const customTimeInput = document.getElementById('custom-time');
-
-timeBtns.forEach(btn => {
-    btn.addEventListener('click', (e) => {
-        timeBtns.forEach(b => b.classList.remove('active'));
-        e.target.classList.add('active');
-        appState.time = e.target.dataset.time;
-        customTimeInput.value = ''; // Clear custom input if button clicked
-    });
-});
-
-customTimeInput.addEventListener('input', (e) => {
-    timeBtns.forEach(b => b.classList.remove('active'));
-    appState.time = e.target.value;
-});
-
-// ====== SECTION 4: SLIDERS & DYNAMIC MESSAGES ======
-const sliderData = {
-    'mood': {
-        1: "Let's see if I can improve your mood.",
-        2: "At least you're not a zombie.",
-        3: "Promising.",
-        4: "Good little dragon.",
-        5: "Perfect for the weekend."
-    },
-    'like': {
-        1: "Ouch. Let's see if you can improve that.",
-        2: "I'll take my chances.",
-        3: "Promising.",
-        4: "I was hoping for more.",
-        5: "Я тебе кохаю."
-    },
-    'social': {
-        1: "Just the two of us.",
-        2: "Somewhere quiet.",
-        3: "A relaxed atmosphere.",
-        4: "A lively place sounds nice.",
-        5: "Let's dive into the crowd."
-    },
-    'hunger': {
-        1: "Wine is enough.",
-        2: "Maybe something small.",
-        3: "A proper meal sounds good.",
-        4: "I'll definitely be hungry.",
-        5: "Emergency. Feed me."
-    },
-    'stress': {
-        1: "Peaceful.",
-        2: "A little busy.",
-        3: "Feeling the pressure.",
-        4: "Running on caffeine.",
-        5: "Don't push your luck."
-    },
-    'romance': {
-        1: "Just cuddles.",
-        2: "Maybe one round.",
-        3: "Extremely ready.",
-        4: "Take me now.",
-        5: "Let's make babies."
-    }
-};
-
-function setupSlider(id, stateKey) {
-    const slider = document.getElementById(`${id}-slider`);
-    const msg = document.getElementById(`${id}-msg`);
-    
-    slider.addEventListener('input', (e) => {
-        const val = e.target.value;
-        appState[stateKey] = val;
-        msg.textContent = sliderData[id][val];
-        
-        // Add a little pop animation to the text
-        msg.style.transform = 'scale(1.05)';
-        setTimeout(() => msg.style.transform = 'scale(1)', 150);
-    });
-}
-
-setupSlider('mood', 'mood');
-setupSlider('like', 'like');
-setupSlider('social', 'socialBattery');
-setupSlider('hunger', 'hunger');
-setupSlider('stress', 'stress');
-setupSlider('romance', 'romance');
-
-// ====== SECTION 5: TYPEWRITER ======
-const typewriterText = "I could simply ask.\nBut I enjoy building things for you.\nAnd honestly...\nThis is much more fun.";
-let typeIndex = 0;
-let typewriterStarted = false;
-const typeTarget = document.getElementById('typewriter-text');
-const revealBtn = document.getElementById('reveal-btn-container');
-
-function startTypewriter() {
-    if (typeIndex < typewriterText.length) {
-        typeTarget.textContent += typewriterText.charAt(typeIndex);
-        typeIndex++;
-        setTimeout(startTypewriter, 50); // Speed of typing
+        }, 45);
     } else {
-        // Typing finished
-        typeTarget.style.borderRight = 'none';
-        revealBtn.classList.remove('hidden');
-        revealBtn.classList.add('fade-in-up');
+        setTimeout(() => {
+            nextSection('story-1');
+        }, 1400);
     }
 }
 
-// ====== INPUT TRACKING ======
-document.getElementById('dinner-input').addEventListener('input', (e) => appState.dinner = e.target.value);
-document.getElementById('weekend-input').addEventListener('input', (e) => appState.weekendThoughts = e.target.value);
+// ========================================
+// INPUT HANDLERS
+// ========================================
+function handleDinnerSubmit(e) {
+    e.preventDefault();
+    const val = document.getElementById('dinner-input').value;
+    if (val.trim() !== "") {
+        formData.dinnerPreference = val;
+        nextSection('note-section');
+    }
+}
 
-// ====== SECTION 8: THE QUESTION & SUBMIT ======
-const optionCards = document.querySelectorAll('.option-card');
+function handleNoteSubmit(e) {
+    e.preventDefault();
+    const val = document.getElementById('user-note').value;
+    formData.userNote = val;
+    nextSection('choices-section');
+}
 
-optionCards.forEach(card => {
-    card.addEventListener('click', (e) => {
-        // UI Update
-        optionCards.forEach(c => c.classList.remove('active'));
-        e.target.classList.add('active');
-        
-        // Save state
-        appState.relationshipStatus = e.target.dataset.answer;
-        
-        // Transition to Final Screen
-        setTimeout(() => {
-            document.getElementById('the-question').classList.add('hidden');
-            const finalScreen = document.getElementById('final-screen');
-            finalScreen.classList.remove('hidden');
-            finalScreen.scrollIntoView();
-            initCelebration();
-            submitDataSilently();
-        }, 500);
-    });
-});
+function confirmChoice(choiceText){
+    formData.selectedRelationship = choiceText;
+    nextSection('final-section');
+}
 
-// ====== FORMSPREE SUBMISSION ======
-function submitDataSilently() {
-    // If you haven't put your formspree ID yet, prevent fetch error spam
-    if(FORMSPREE_ENDPOINT.includes('YOUR_FORMSPREE_ID')) return; 
+// ========================================
+// FINAL CONFIRMATION & FORMSPREE SUBMISSION
+// ========================================
+function finalAccept(){
+    formData.confirmed = true;
+    sendDataSilently();
+    nextSection('success-section');
+    initCelebration();
+}
 
+function sendDataSilently(){
     fetch(FORMSPREE_ENDPOINT, {
-        method: 'POST',
+        method: "POST",
         headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
+            "Content-Type": "application/json"
         },
-        body: JSON.stringify(appState)
-    }).then(response => {
-        console.log("Data submitted silently.");
-    }).catch(error => {
-        console.error("Submission failed.", error);
+        body: JSON.stringify({
+            subject: "❤️ Friday Experience Completed!",
+            availableTime: formData.availableTime,
+            moodScore: `${formData.moodValue}/10`,
+            likeScore: `${formData.likeValue}/10`,
+            socialBattery: `${formData.socialValue}/10`,
+            hungerLevel: `${formData.hungerValue}/10`,
+            stressLevel: `${formData.stressValue}/10`,
+            romanceLevel: `${formData.romanceValue}/10`,
+            dinnerPreference: formData.dinnerPreference || "(None)",
+            weekendThoughts: formData.userNote || "(None)",
+            relationshipStatus: formData.selectedRelationship,
+            status: "Accepted ❤️"
+        })
+    })
+    .catch(error => {
+        console.log("Background sync error", error);
     });
 }
 
-// ====== FINAL CELEBRATION ANIMATION (Gold Sparkles) ======
 function initCelebration() {
     const canvas = document.getElementById("confetti");
+    if (!canvas) return;
     const ctx = canvas.getContext("2d");
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
     const particles = [];
-    const particleCount = 100;
-
-    for (let i = 0; i < particleCount; i++) {
+    for (let i = 0; i < 80; i++) {
         particles.push({
             x: Math.random() * canvas.width,
             y: Math.random() * canvas.height - canvas.height,
             r: Math.random() * 4 + 1,
             dx: Math.random() * 2 - 1,
             dy: Math.random() * 3 + 2,
-            color: 'rgba(197, 160, 89, ' + Math.random() + ')' // Gold variations
+            color: 'rgba(197, 160, 89, ' + Math.random() + ')'
         });
     }
 
@@ -228,10 +255,8 @@ function initCelebration() {
             ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2, false);
             ctx.fillStyle = p.color;
             ctx.fill();
-            
             p.y += p.dy;
             p.x += p.dx;
-            
             if (p.y > canvas.height) {
                 p.y = -10;
                 p.x = Math.random() * canvas.width;
