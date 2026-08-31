@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Friday.</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <section id="hero" class="fullscreen">
+        <div class="hero-content fade-in-up">
+            <h1>Friday.</h1>
+            <p class="subheadline">Not a plan.<br>Not a schedule.<br>Just us.</p>
+            <button class="btn-primary" onclick="scrollToSection('story')">Continue</button>
+        </div>
+    </section>
+
+    <section id="story" class="story-section">
+        <div class="chapter fade-scroll">
+            <p>"As I matched with you, I had no idea where this would go.<br>Before we even had our first date, we already argued.<br>And somehow that was exactly the moment I became interested."</p>
+            <div class="image-placeholder">[IMAGE PLACEHOLDER 1]</div>
+        </div>
+
+        <div class="chapter fade-scroll">
+            <p>"We met again the same week.<br>I was already building things like this for you.<br>That should have been my first warning sign."</p>
+            <div class="image-placeholder">[IMAGE PLACEHOLDER 2 - us wasted]</div>
+        </div>
+
+        <div class="chapter fade-scroll">
+            <p>"Then you went on vacation.<br>And somehow I missed you more than I expected."</p>
+        </div>
+
+        <div class="chapter fade-scroll">
+            <p>"After that came our weekend.<br>I cooked for you.<br>Then we went to the wedding."</p>
+            <div class="image-placeholder">[IMAGE PLACEHOLDER 3 - wedding]</div>
+        </div>
+
+        <div class="chapter fade-scroll">
+            <p>"We were definitely the best couple there."</p>
+        </div>
+
+        <div class="chapter fade-scroll">
+            <p>"And then there was that Sunday night.<br>We kissed. Made out. Talked. Argued. Talked again.<br>Somehow fixed things.<br>And ended up eating Turkish food at a bus stop until 4:30 in the morning."</p>
+        </div>
+
+        <div class="chapter fade-scroll">
+            <p>"It never gets boring with us.<br>I've never been so reckless with time as I am with you."</p>
+        </div>
+
+        <div class="chapter fade-scroll">
+            <p>"We talked about children."</p>
+            <div class="image-placeholder">[IMAGE PLACEHOLDER 4 - future kids]</div>
+        </div>
+
+        <div class="chapter fade-scroll">
+            <p>"We talked about marriage."</p>
+            <div class="image-placeholder">[IMAGE PLACEHOLDER 5 - engagement ring]</div>
+        </div>
+
+        <div class="chapter fade-scroll">
+            <p>"And maybe the craziest thing is...<br>None of that feels crazy."</p>
+        </div>
+
+        <div class="chapter fade-scroll">
+            <p>"I've never been this sure about someone.<br>Not because it fixes anything.<br>Not because it's perfect.<br>Just because it feels right."</p>
+            <div class="image-placeholder">[IMAGE PLACEHOLDER 6 - future family]</div>
+        </div>
+
+        <div class="chapter fade-scroll">
+            <p>"So this weekend will be special.<br>Because Saturday belongs to you.<br>You're cooking.<br>But before that...<br>We need to talk about Friday."</p>
+            <div class="spacer-small"></div>
+            <button class="btn-primary" onclick="scrollToSection('availability')">Let's talk about Friday</button>
+        </div>
+    </section>
+
+    <section id="availability" class="interactive-section fullscreen">
+        <div class="container fade-scroll">
+            <h2>Before we start...</h2>
+            <p>You said you have more time on Friday. Don't give me only the evening.</p>
+            
+            <div class="time-selector">
+                <button class="time-btn" data-time="18:00">18:00</button>
+                <button class="time-btn" data-time="19:00">19:00</button>
+                <button class="time-btn" data-time="20:00">20:00</button>
+                <button class="time-btn" data-time="21:00">21:00</button>
+            </div>
+            <input type="text" id="custom-time" class="minimal-input" placeholder="Or type a custom time...">
+            <div class="spacer-small"></div>
+            <button class="btn-secondary" onclick="scrollToSection('sliders')">Next</button>
+        </div>
+    </section>
+
+    <section id="sliders" class="interactive-section">
+        <div class="container fade-scroll">
+            
+            <div class="slider-card fade-scroll">
+                <h3>How are you feeling for the weekend?</h3>
+                <div class="slider-wrapper">
+                    <span>😣</span>
+                    <input type="range" min="1" max="5" value="3" class="custom-slider" id="mood-slider">
+                    <span>🤩</span>
+                </div>
+                <p class="slider-msg" id="mood-msg">Promising.</p>
+            </div>
+
+            <div class="slider-card fade-scroll">
+                <h3>How much do you like me?</h3>
+                <div class="slider-wrapper">
+                    <span>💔</span>
+                    <input type="range" min="1" max="5" value="3" class="custom-slider" id="like-slider">
+                    <span>❤️</span>
+                </div>
+                <p class="slider-msg" id="like-msg">Promising.</p>
+            </div>
+
+            <div class="slider-card fade-scroll">
+                <h3>Social battery?</h3>
+                <div class="slider-wrapper">
+                    <span>🪫</span>
+                    <input type="range" min="1" max="5" value="3" class="custom-slider" id="social-slider">
+                    <span>🔋</span>
+                </div>
+                <p class="slider-msg" id="social-msg">A relaxed atmosphere.</p>
+            </div>
+
+            <div class="slider-card fade-scroll">
+                <h3>Hunger level for Friday?</h3>
+                <div class="slider-wrapper">
+                    <span>🍷</span>
+                    <input type="range" min="1" max="5" value="3" class="custom-slider" id="hunger-slider">
+                    <span>🥩</span>
+                </div>
+                <p class="slider-msg" id="hunger-msg">A proper meal sounds good.</p>
+            </div>
+
+            <div class="slider-card fade-scroll">
+                <h3>Stress level?</h3>
+                <div class="slider-wrapper">
+                    <span>😎</span>
+                    <input type="range" min="1" max="5" value="3" class="custom-slider" id="stress-slider">
+                    <span>😰</span>
+                </div>
+                <p class="slider-msg" id="stress-msg">Feeling the pressure.</p>
+            </div>
+
+            <div class="slider-card fade-scroll">
+                <h3>Romance level?</h3>
+                <div class="slider-wrapper">
+                    <span>😴</span>
+                    <input type="range" min="1" max="5" value="3" class="custom-slider" id="romance-slider">
+                    <span>🥵</span>
+                </div>
+                <p class="slider-msg" id="romance-msg">Extremely ready.</p>
+            </div>
+
+            <div class="spacer-small"></div>
+            <button class="btn-secondary" onclick="scrollToSection('reveal')">Continue</button>
+        </div>
+    </section>
+
+    <section id="reveal" class="fullscreen centered-text">
+        <div class="container">
+            <h2 id="typewriter-text" class="typewriter"></h2>
+            <div id="reveal-btn-container" class="hidden">
+                <div class="spacer-small"></div>
+                <button class="btn-secondary" onclick="scrollToSection('dinner')">What's next?</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="dinner" class="interactive-section fullscreen">
+        <div class="container fade-scroll">
+            <h2>Tell me what you would love to eat on Friday night.</h2>
+            <input type="text" id="dinner-input" class="minimal-input large" placeholder="Your cravings here...">
+            <div class="spacer-small"></div>
+            <button class="btn-secondary" onclick="scrollToSection('thoughts')">Almost done</button>
+        </div>
+    </section>
+
+    <section id="thoughts" class="interactive-section fullscreen">
+        <div class="container fade-scroll">
+            <h2>One last thing...</h2>
+            <p>Tell me anything you have in mind for the weekend.</p>
+            <textarea id="weekend-input" class="minimal-textarea" rows="4" placeholder="Your thoughts..."></textarea>
+            <div class="spacer-small"></div>
+            <button class="btn-secondary" onclick="scrollToSection('the-question')">The final question</button>
+        </div>
+    </section>
+
+    <section id="the-question" class="interactive-section fullscreen">
+        <div class="container fade-scroll">
+            <h1>So...</h1>
+            <h2>What are we?</h2>
+            
+            <div class="options-grid">
+                <div class="option-card" data-answer="We're a couple.">We're a couple.</div>
+                <div class="option-card" data-answer="I need more time.">I need more time.</div>
+                <div class="option-card" data-answer="Let's keep dating.">Let's keep dating.</div>
+                <div class="option-card" data-answer="I'm all in.">I'm all in.</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="final-screen" class="fullscreen hidden">
+        <canvas id="confetti"></canvas>
+        <div class="container final-content">
+            <h2>I know this is crazy.</h2>
+            <h2>But somehow it feels right.</h2>
+            <p>Let me take care of Friday.<br>And let's see where this story takes us.</p>
+            <h1 class="ukrainian-text">До п'ятниці ❤️</h1>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
