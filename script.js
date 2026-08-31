@@ -13,7 +13,7 @@ const appState = {
 };
 
 // Replace this with your actual Formspree endpoint string
-const FORMSPREE_ENDPOINT = 'https://formspree.io/f/YOUR_FORMSPREE_ID'; 
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xqpkeonp'; 
 
 // ====== NAVIGATION ======
 function scrollToSection(id) {
