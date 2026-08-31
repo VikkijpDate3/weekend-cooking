@@ -11,209 +11,196 @@
 </head>
 <body>
 
-    <section id="hero" class="fullscreen">
-        <div class="hero-content fade-in-up">
+    <div class="section active" id="hero">
+        <div class="container hero-content">
             <h1>Friday.</h1>
-            <p class="subheadline">Not a plan.<br>Not a schedule.<br>Just us.</p>
-            <button class="btn-primary" onclick="scrollToSection('story')">Continue</button>
+            <p class="hero-text">Not a plan.<br>Not a schedule.<br>Just us.</p>
+            <button class="btn-primary" onclick="nextSlide()">Continue</button>
+            <div class="scroll-indicator">oder wischen</div>
         </div>
-    </section>
-
-    <section id="story" class="story-section">
-        <div class="chapter fade-scroll">
-            <p>"As I matched with you, I had no idea where this would go.<br>Before we even had our first date, we already argued.<br>And somehow that was exactly the moment I became interested."</p>
-            <div class="weekend-cooking/PHOTO-2026-08-13-12-34-57.jpg"> alt="" class="story-image">
-        </div>
-
-       <div class="chapter fade-scroll">
-    <p>"We met again the same week.<br>I was already building things like this for you.<br>That should have been my first warning sign."</p>
-    <img src="weekend-cooking/EveningWasted.jpg" alt="" class="story-image">
     </div>
 
-        <div class="chapter fade-scroll">
-            <p>"Then you went on vacation.<br>And somehow I missed you more than I expected."</p>
-        </div>
-
-        <div class="chapter fade-scroll">
-            <p>"After that came our weekend.<br>I cooked for you.<br>Then we went to the wedding."</p>
-            <div class="weekend-cooking/wedding.JPG" alt="" class="story-image">
-        </div>
-
-        <div class="chapter fade-scroll">
-            <p>"We were definitely the best couple there."</p>
-        </div>
-
-        <div class="chapter fade-scroll">
-            <p>"And then there was that Sunday night.<br>We kissed. Made out. Talked. Argued. Talked again.<br>Somehow fixed things.<br>And ended up eating Turkish food at a bus stop until 4:30 in the morning."</p>
-        </div>
-
-        <div class="chapter fade-scroll">
-            <p>"It never gets boring with us.<br>I've never been so reckless with time as I am with you."</p>
-        </div>
-
-        <div class="chapter fade-scroll">
-            <p>"We talked about children."</p>
-            <div class="weekend-cooking/Weedingkids.jpg" alt="" class="story-image">
-        </div>
-
-        <div class="chapter fade-scroll">
-            <p>"We talked about marriage."</p>
-            <div class="weekend-cooking/Engagementring.jpg" alt="" class="story-image">
-        </div>
-
-        <div class="chapter fade-scroll">
-            <p>"And maybe the craziest thing is...<br>None of that feels crazy."</p>
-        </div>
-
-        <div class="chapter fade-scroll">
-            <p>"I've never been this sure about someone.<br>Not because it fixes anything.<br>Not because it's perfect.<br>Just because it feels right."</p>
-            <div class="weekend-cooking/Olderkids.jpg" alt="" class="story-image">
-        </div>
-
-        <div class="chapter fade-scroll">
-            <p>"So this weekend will be special.<br>Because Saturday belongs to you.<br>You're cooking.<br>But before that...<br>We need to talk about Friday."</p>
-            <div class="spacer-small"></div>
-            <button class="btn-primary" onclick="scrollToSection('availability')">Let's talk about Friday</button>
-        </div>
-    </section>
-
-    <section id="availability" class="interactive-section fullscreen">
-        <div class="container fade-scroll">
-            <h2>Before we start...</h2>
-            <p>You said you have more time on Friday. Don't give me only the evening.</p>
-            
-            <div class="time-selector">
-                <button class="time-btn" data-time="18:00">18:00</button>
-                <button class="time-btn" data-time="19:00">19:00</button>
-                <button class="time-btn" data-time="20:00">20:00</button>
-                <button class="time-btn" data-time="21:00">21:00</button>
-            </div>
-            <input type="text" id="custom-time" class="minimal-input" placeholder="Or type a custom time...">
-            <div class="spacer-small"></div>
-            <button class="btn-secondary" onclick="scrollToSection('sliders')">Next</button>
-        </div>
-    </section>
-
-    <section id="sliders" class="interactive-section">
-        <div class="container fade-scroll">
-            
-            <div class="slider-card fade-scroll">
-                <h3>How are you feeling for the weekend?</h3>
-                <div class="slider-wrapper">
-                    <span>😣</span>
-                    <input type="range" min="1" max="5" value="3" class="custom-slider" id="mood-slider">
-                    <span>🤩</span>
-                </div>
-                <p class="slider-msg" id="mood-msg">Promising.</p>
-            </div>
-
-            <div class="slider-card fade-scroll">
-                <h3>How much do you like me?</h3>
-                <div class="slider-wrapper">
-                    <span>💔</span>
-                    <input type="range" min="1" max="5" value="3" class="custom-slider" id="like-slider">
-                    <span>❤️</span>
-                </div>
-                <p class="slider-msg" id="like-msg">Promising.</p>
-            </div>
-
-            <div class="slider-card fade-scroll">
-                <h3>Social battery?</h3>
-                <div class="slider-wrapper">
-                    <span>🪫</span>
-                    <input type="range" min="1" max="5" value="3" class="custom-slider" id="social-slider">
-                    <span>🔋</span>
-                </div>
-                <p class="slider-msg" id="social-msg">A relaxed atmosphere.</p>
-            </div>
-
-            <div class="slider-card fade-scroll">
-                <h3>Hunger level for Friday?</h3>
-                <div class="slider-wrapper">
-                    <span>🍷</span>
-                    <input type="range" min="1" max="5" value="3" class="custom-slider" id="hunger-slider">
-                    <span>🥩</span>
-                </div>
-                <p class="slider-msg" id="hunger-msg">A proper meal sounds good.</p>
-            </div>
-
-            <div class="slider-card fade-scroll">
-                <h3>Stress level?</h3>
-                <div class="slider-wrapper">
-                    <span>😎</span>
-                    <input type="range" min="1" max="5" value="3" class="custom-slider" id="stress-slider">
-                    <span>😰</span>
-                </div>
-                <p class="slider-msg" id="stress-msg">Feeling the pressure.</p>
-            </div>
-
-            <div class="slider-card fade-scroll">
-                <h3>Romance level?</h3>
-                <div class="slider-wrapper">
-                    <span>😴</span>
-                    <input type="range" min="1" max="5" value="3" class="custom-slider" id="romance-slider">
-                    <span>🥵</span>
-                </div>
-                <p class="slider-msg" id="romance-msg">Extremely ready.</p>
-            </div>
-
-            <div class="spacer-small"></div>
-            <button class="btn-secondary" onclick="scrollToSection('reveal')">Continue</button>
-        </div>
-    </section>
-
-    <section id="reveal" class="fullscreen centered-text">
+    <div class="section">
         <div class="container">
-            <h2 id="typewriter-text" class="typewriter"></h2>
-            <div id="reveal-btn-container" class="hidden">
-                <div class="spacer-small"></div>
-                <button class="btn-secondary" onclick="scrollToSection('dinner')">What's next?</button>
-            </div>
+            <p class="hero-text serif-title">"As I matched with you, I had no idea where this would go.<br>Before we even had our first date, we already argued.<br>And somehow that was exactly the moment I became interested."</p>
+        <img src="weekend-cooking/PHOTO-2026-08-13-12-34-57.jpg" alt="" class="story-image">
         </div>
-    </section>
+    </div>
 
-    <section id="dinner" class="interactive-section fullscreen">
-        <div class="container fade-scroll">
-            <h2>Tell me what you would love to eat on Friday night.</h2>
-            <input type="text" id="dinner-input" class="minimal-input large" placeholder="Your cravings here...">
-            <div class="spacer-small"></div>
-            <button class="btn-secondary" onclick="scrollToSection('thoughts')">Almost done</button>
+    <div class="section">
+        <div class="container">
+            <p class="hero-text serif-title">"We met again the same week.<br>I was already building things like this for you.<br>That should have been my first warning sign."</p>
+            <img src="weekend-cooking/EveningWasted.jpg" alt="" class="story-image">
         </div>
-    </section>
+    </div>
 
-    <section id="thoughts" class="interactive-section fullscreen">
-        <div class="container fade-scroll">
-            <h2>One last thing...</h2>
-            <p>Tell me anything you have in mind for the weekend.</p>
-            <textarea id="weekend-input" class="minimal-textarea" rows="4" placeholder="Your thoughts..."></textarea>
-            <div class="spacer-small"></div>
-            <button class="btn-secondary" onclick="scrollToSection('the-question')">The final question</button>
+    <div class="section">
+        <div class="container">
+            <p class="hero-text serif-title">"Then you went on vacation.<br>And somehow I missed you more than I expected."</p>
         </div>
-    </section>
+    </div>
 
-    <section id="the-question" class="interactive-section fullscreen">
-        <div class="container fade-scroll">
-            <h1>So...</h1>
-            <h2>What are we?</h2>
+    <div class="section">
+        <div class="container">
+            <p class="hero-text serif-title">"After that came our weekend.<br>I cooked for you.<br>Then we went to the wedding."</p>
+            <img src="weekend-cooking/wedding.jpg" alt="" class="story-image">
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="container">
+            <p class="hero-text serif-title">"We were definitely the best couple there."</p>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="container">
+            <p class="hero-text serif-title">"And then there was that Sunday night.<br>We kissed. Made out. Talked. Argued. Talked again.<br>Somehow fixed things.<br>And ended up eating Turkish food at a bus stop until 4:30 in the morning."</p>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="container">
+            <p class="hero-text serif-title">"It never gets boring with us.<br>I've never been so reckless with time as I am with you."</p>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="container">
+            <p class="hero-text serif-title">"We talked about children."</p>
+            <img src="weekend-cooking/Weedingkids.jpg" alt="" class="story-image">
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="container">
+            <p class="hero-text serif-title">"We talked about marriage."</p>
+            <img src="weekend-cooking/Engagementring.jpg" alt="" class="story-image">
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="container">
+            <p class="hero-text serif-title">"And maybe the craziest thing is...<br>None of that feels crazy."</p>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="container">
+            <p class="hero-text serif-title">"I've never been this sure about someone.<br>Not because it fixes anything.<br>Not because it's perfect.<br>Just because it feels right."</p>
+            <img src="weekend-cooking/Olderkids.jpg" alt="" class="story-image">
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="container">
+            <p class="hero-text serif-title">"So this weekend will be special.<br>Because Saturday belongs to you.<br>You're cooking.<br>But before that...<br>We need to talk about Friday."</p>
+            <button class="btn-primary" onclick="nextSlide()" style="margin-top: 2rem;">Let's talk about Friday</button>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="container">
+            <h2 class="serif-title" style="font-size: 2.5rem; color: var(--accent-color); margin-bottom: 1rem;">Before we start...</h2>
+            <p class="hero-text">You said you have more time on Friday.<br>Don't give me only the evening.</p>
             
-            <div class="options-grid">
-                <div class="option-card" data-answer="We're a couple.">We're a couple.</div>
-                <div class="option-card" data-answer="I need more time.">I need more time.</div>
-                <div class="option-card" data-answer="Let's keep dating.">Let's keep dating.</div>
-                <div class="option-card" data-answer="I'm all in.">I'm all in.</div>
+            <input type="text" id="custom-time" placeholder="Wann bist du hier? (z.B. 18:00)">
+            <button class="btn-primary" onclick="nextSlide()">Weiter</button>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="container">
+            <div class="slider-box">
+                <label>How are you feeling for the weekend?</label>
+                <div class="slider-scale-labels"><span>😣</span><span>🤩</span></div>
+                <input type="range" min="1" max="5" value="3" id="mood-slider">
+                <p class="dynamic-message" id="mood-msg">Promising.</p>
+            </div>
+            <button class="btn-secondary" onclick="nextSlide()">Next</button>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="container">
+            <div class="slider-box">
+                <label>How much do you like me?</label>
+                <div class="slider-scale-labels"><span>💔</span><span>❤️</span></div>
+                <input type="range" min="1" max="5" value="3" id="like-slider">
+                <p class="dynamic-message" id="like-msg">Promising.</p>
+            </div>
+            <button class="btn-secondary" onclick="nextSlide()">Next</button>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="container">
+            <div class="slider-box">
+                <label>Social battery?</label>
+                <div class="slider-scale-labels"><span>🪫</span><span>🔋</span></div>
+                <input type="range" min="1" max="5" value="3" id="social-slider">
+                <p class="dynamic-message" id="social-msg">A relaxed atmosphere.</p>
+            </div>
+            <button class="btn-secondary" onclick="nextSlide()">Next</button>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="container">
+            <div class="slider-box">
+                <label>Hunger level for Friday?</label>
+                <div class="slider-scale-labels"><span>🍷</span><span>🥩</span></div>
+                <input type="range" min="1" max="5" value="3" id="hunger-slider">
+                <p class="dynamic-message" id="hunger-msg">A proper meal sounds good.</p>
+            </div>
+            <button class="btn-secondary" onclick="nextSlide()">Next</button>
+        </div>
+    </div>
+
+    <div class="section" id="reveal">
+        <div class="container reveal-container">
+            <p id="typewriter-text" class="typewriter serif-title"></p>
+            <button class="btn-primary" id="reveal-btn" onclick="nextSlide()" style="opacity: 0; pointer-events: none; transition: 1s;">What's next?</button>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="container">
+            <h2 class="serif-title" style="font-size: 2rem; color: var(--accent-color); margin-bottom: 2rem;">Tell me what you would love to eat on Friday night.</h2>
+            <input type="text" id="dinner-input" placeholder="Your cravings here...">
+            <button class="btn-primary" onclick="nextSlide()">Fast geschafft</button>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="container">
+            <h2 class="serif-title" style="font-size: 2rem; color: var(--accent-color); margin-bottom: 2rem;">One last thing...</h2>
+            <p class="subtitle">Tell me anything you have in mind for the weekend.</p>
+            <input type="text" id="weekend-input" placeholder="Your thoughts...">
+            <button class="btn-primary" onclick="nextSlide()">Zur letzten Frage</button>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="container">
+            <h1 class="success-title serif-title">So...</h1>
+            <p class="subtitle serif-title" style="font-size: 1.5rem;">What are we?</p>
+            
+            <div class="choice-grid">
+                <div class="choice-card glow-card" onclick="submitFinal('We are a couple.')">We're a couple.</div>
+                <div class="choice-card" onclick="submitFinal('I need more time.')">I need more time.</div>
+                <div class="choice-card" onclick="submitFinal('Let us keep dating.')">Let's keep dating.</div>
             </div>
         </div>
-    </section>
+    </div>
 
-    <section id="final-screen" class="fullscreen hidden">
-        <canvas id="confetti"></canvas>
-        <div class="container final-content">
-            <h2>I know this is crazy.</h2>
-            <h2>But somehow it feels right.</h2>
-            <p>Let me take care of Friday.<br>And let's see where this story takes us.</p>
-            <h1 class="ukrainian-text">До п'ятниці ❤️</h1>
+    <div class="section" id="final-screen">
+        <div class="container">
+            <h2 class="success-title serif-title" style="font-size: 2.5rem; margin-bottom: 1rem;">I know this is crazy.</h2>
+            <p class="hero-text serif-title">But somehow it feels right.<br>Let me take care of Friday.<br>And let's see where this story takes us.</p>
+            <h1 class="success-title" style="color: var(--gold-color); margin-top: 3rem; font-size: 2rem;">До п'ятниці ❤️</h1>
         </div>
-    </section>
+    </div>
 
     <script src="script.js"></script>
 </body>
