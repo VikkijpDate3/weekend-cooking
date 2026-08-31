@@ -2,16 +2,13 @@
    ROOT VARIABLES
 ======================================== */
 :root {
-    --bg-color: #FBF9F5;
-    --text-color: #1A2E22;
-    --accent-color: #1E3F20;
+    --bg-color: #FDFBF7;
+    --text-color: #1A3626;
+    --accent-color: #1A3626;
     --gold-color: #C5A059;
-    --border-color: rgba(30, 63, 32, 0.2);
+    --border-color: rgba(26, 54, 38, 0.2);
 }
 
-/* ========================================
-   RESET
-======================================== */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -23,14 +20,12 @@ body {
     color: var(--text-color);
     font-family: 'Plus Jakarta Sans', sans-serif;
     font-weight: 300;
-    overflow: hidden; /* Scrollbalken versteckt, JS übernimmt Navigation */
+    overflow: hidden;
     height: 100vh;
-   position: fixed;
+    width: 100vw;
+    position: fixed;
 }
 
-/* ========================================
-   TYPOGRAPHY
-======================================== */
 .serif-title {
     font-family: 'Playfair Display', serif;
     font-weight: 400;
@@ -41,11 +36,14 @@ body {
     text-align: center;
 }
 
-/* ========================================
-   SECTION SYSTEM
-======================================== */
+.title-large {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    color: var(--accent-color);
+}
+
 .section {
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
@@ -55,36 +53,26 @@ body {
     align-items: center;
     opacity: 0;
     pointer-events: none;
-    transition: opacity .8s cubic-bezier(.16,1,.3,1);
+    transition: opacity 0.8s cubic-bezier(.16,1,.3,1);
     padding: 2rem;
-   overflow: hidden;
+    background-color: var(--bg-color);
+    overflow-y: auto;
 }
 
 .section.active {
     opacity: 1;
     pointer-events: auto;
+    z-index: 10;
 }
 
 .container {
     width: 100%;
-    max-width: 650px;
+    max-width: 700px;
+    margin: 0 auto;
     text-align: center;
 }
 
-/* --- BILDER STYLING (Neu hinzugefügt für deine Fotos) --- */
-.story-image {
-    max-height: 40vh;
-    width: auto;
-    max-width: 100%;
-    object-fit: contain;
-    border-radius: 8px;
-    margin-top: 2rem;
-    box-shadow: 0 15px 30px rgba(30,63,32,.1);
-}
-
-/* ========================================
-   HERO
-======================================== */
+/* HERO */
 .hero-content {
     text-align: center;
 }
@@ -96,9 +84,9 @@ body {
 }
 
 .hero-text {
-    font-size: 1.15rem;
+    font-size: 1.2rem;
     line-height: 1.8;
-    margin-bottom: 2rem;
+    margin-bottom: 2.5rem;
     color: #4A5D52;
 }
 
@@ -119,28 +107,71 @@ body {
     letter-spacing: .2em;
     text-transform: uppercase;
     color: var(--gold-color);
-    animation: pulse 2s infinite;
 }
 
-@keyframes pulse {
-    0% { opacity: 0.5; }
-    50% { opacity: 1; }
-    100% { opacity: 0.5; }
+/* STORY CHAPTERS */
+.story-chapter-text {
+    font-size: 1.5rem;
+    font-style: italic;
+    line-height: 1.6;
+    margin-bottom: 2.5rem;
+    color: var(--accent-color);
 }
 
-/* ========================================
-   BUTTONS
-======================================== */
+/* EDITORIAL SECTION ("Our Friday") */
+.editorial-container {
+    max-width: 750px;
+    text-align: left;
+}
+
+.editorial-eyebrow {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    color: var(--gold-color);
+    display: block;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.editorial-title {
+    font-size: 3rem;
+    margin-bottom: 2rem;
+    color: var(--accent-color);
+    text-align: center;
+}
+
+.editorial-content {
+    font-size: 1.15rem;
+    line-height: 1.9;
+    color: #3A4D42;
+    margin-bottom: 2.5rem;
+}
+
+.editorial-content p {
+    margin-bottom: 1.2rem;
+}
+
+.editorial-highlight {
+    font-style: italic;
+    color: var(--gold-color);
+    font-family: 'Playfair Display', serif;
+    font-size: 1.25rem;
+    margin-top: 1.5rem;
+    text-align: center;
+}
+
+/* BUTTONS & INPUTS */
 .btn-primary {
     background-color: var(--accent-color);
     color: var(--bg-color);
     border: 1px solid var(--accent-color);
     padding: 1rem 2.5rem;
-    font-size: .95rem;
+    font-size: 0.95rem;
     font-family: 'Plus Jakarta Sans', sans-serif;
-    letter-spacing: .05em;
+    letter-spacing: 0.05em;
     cursor: pointer;
-    transition: .35s ease;
+    transition: all 0.35s ease;
     border-radius: 4px;
 }
 
@@ -148,22 +179,9 @@ body {
     background-color: transparent;
     color: var(--accent-color);
     transform: translateY(-3px);
-    box-shadow: 0 15px 30px rgba(30,63,32,.08);
+    box-shadow: 0 15px 30px rgba(26,54,38,0.08);
 }
 
-.btn-secondary {
-    background: none;
-    border: none;
-    color: #777;
-    font-size: .85rem;
-    cursor: pointer;
-    margin-top: 1.5rem;
-    text-decoration: underline;
-}
-
-/* ========================================
-   INPUT
-======================================== */
 input[type="text"] {
     width: 100%;
     background: transparent;
@@ -184,9 +202,7 @@ input[type="text"] {
     margin-bottom: 2rem;
 }
 
-/* ========================================
-   SLIDERS
-======================================== */
+/* SLIDERS */
 .slider-box {
     margin: 2rem 0;
 }
@@ -194,15 +210,14 @@ input[type="text"] {
 .slider-box label {
     display: block;
     text-align: center;
-    font-family: 'Playfair Display', serif;
-    font-size: 1.4rem;
-    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
 }
 
 .slider-scale-labels {
     display: flex;
     justify-content: space-between;
-    font-size: 1.5rem; /* Größer für die Emojis */
+    font-size: 1.5rem;
     margin-bottom: 1rem;
 }
 
@@ -218,48 +233,47 @@ input[type="range"] {
     font-style: italic;
     color: var(--gold-color);
     min-height: 1.5rem;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
 }
 
-/* ========================================
-   CHOOSE YOUR FRIDAY (GRID)
-======================================== */
+/* CHOICE CARDS (Clean Selection Options) */
 .choice-grid {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 1rem;
     align-items: center;
     margin-top: 2rem;
 }
 
 .choice-card {
     width: 100%;
-    max-width: 350px;
-    height: 100px;
+    max-width: 380px;
+    height: 75px;
     background: #FFFFFF;
     border: 1px solid var(--border-color);
     display: flex;
     align-items: center;
     justify-content: center;
     font-family: 'Playfair Display', serif;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     color: var(--accent-color);
     cursor: pointer;
-    transition: transform .45s ease, box-shadow .45s ease, border-color .45s ease;
+    transition: transform 0.45s ease, box-shadow 0.45s ease, border-color 0.45s ease;
+    border-radius: 4px;
 }
 
 .choice-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 25px 50px rgba(30,63,32,.12);
+    box-shadow: 0 25px 50px rgba(26,54,38,0.12);
 }
 
 .glow-card {
     border-color: var(--gold-color);
-    box-shadow: 0 0 35px rgba(197,160,89,.18);
+    box-shadow: 0 0 35px rgba(197,160,89,0.18);
 }
 
-/* ========================================
-   REVEAL & TYPEWRITER
-======================================== */
+/* REVEAL & SUCCESS */
 .reveal-container {
     max-width: 800px;
 }
@@ -271,21 +285,33 @@ input[type="range"] {
     min-height: 120px;
 }
 
-/* ========================================
-   SUCCESS
-======================================== */
-.success-title {
-    font-size: 3rem;
-    color: var(--accent-color);
+#success-section {
+    position: relative;
+    background-color: var(--accent-color);
 }
 
-/* ========================================
-   MOBILE OPTIMIZATION
-======================================== */
-@media(max-width:600px){
+#confetti {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.final-content {
+    position: relative;
+    z-index: 2;
+}
+
+.success-title {
+    font-size: 3rem;
+}
+
+/* MOBILE */
+@media(max-width: 600px) {
     #hero h1 { font-size: 4rem; }
-    .hero-text { font-size: 1rem; }
-    .typewriter { font-size: 1.5rem; }
-    .choice-card { height: 80px; font-size: 1.2rem; }
-    .success-title { font-size: 2.2rem; }
+    .editorial-title { font-size: 2.2rem; }
+    .title-large { font-size: 2rem; }
 }
